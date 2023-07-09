@@ -27,11 +27,15 @@ class _HomeState extends State<Home> {
             title: Text('Owaiz Grocery App'),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  homeBloc.add(HomeWishlistButtonNavigateEvent());
+                },
                 icon: Icon(Icons.favorite_border),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  homeBloc.add(HomeProductCartButtonClicketEvent());
+                },
                 icon: Icon(Icons.shopping_bag_outlined),
               ),
             ],
