@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
               ),
               IconButton(
                 onPressed: () {
-                  homeBloc.add(HomeProductCartButtonClicketEvent());
+                  homeBloc.add(HomeCratButtonNavigateEvent());
                 },
                 icon: Icon(Icons.shopping_bag_outlined),
               ),
