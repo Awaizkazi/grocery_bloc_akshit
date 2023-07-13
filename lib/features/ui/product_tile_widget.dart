@@ -61,7 +61,7 @@ class ProductTileWidget extends StatelessWidget {
                       },
                       icon: Icon(Icons.shopping_bag_outlined))
                 ],
-              )
+              ),
             ],
           ),
         ],
