@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_bloc_akshit/features/cart/ui/cart.dart';
+import 'package:grocery_bloc_akshit/features/cart/ui/wishlist.dart';
 import 'package:grocery_bloc_akshit/features/home/bloc/home_bloc.dart';
+import 'package:grocery_bloc_akshit/features/home/bloc/models/home_product_data_model.dart';
+import 'package:grocery_bloc_akshit/features/ui/product_tile_widget.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -11,6 +14,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    homeBloc.add(HomeInitialEvent());
+    super.initState();
+  }
+
   final HomeBloc homeBloc = HomeBloc();
   @override
   Widget build(BuildContext context) {
@@ -27,29 +36,61 @@ class _HomeState extends State<Home> {
               builder: (context) => Cart(),
             ),
           );
+        } else if (state is HomeNavigateToWishListPageActionState) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => WishList(),
+            ),
+          );
         }
       },
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text('Owaiz Grocery App'),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  homeBloc.add(HomeWishlistButtonNavigateEvent());
-                },
-                icon: Icon(Icons.favorite_border),
+        switch (state.runtimeType) {
+          case HomeLoadingState:
+            return Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
               ),
-              IconButton(
-                onPressed: () {
-                  homeBloc.add(HomeCratButtonNavigateEvent());
-                },
-                icon: Icon(Icons.shopping_bag_outlined),
+            );
+
+          case HomeLoadedSuccessState:
+            final successState = state as HomeLoadedSuccessState;
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.teal,
+                title: Text('Grocery App'),
+                actions: [
+                  IconButton(
+                      onPressed: () {
+                        homeBloc.add(HomeWishlistButtonNavigateEvent());
+                      },
+                      icon: Icon(Icons.favorite_border)),
+                  IconButton(
+                      onPressed: () {
+                        homeBloc.add(HomeCratButtonNavigateEvent());
+                      },
+                      icon: Icon(Icons.shopping_bag_outlined))
+                ],
               ),
-            ],
-          ),
-        );
+              body: ListView.builder(
+                itemCount: successState.products.length,
+                itemBuilder: (context, index) {
+                  return ProductTileWidget(
+                      productDataModel: successState.products[index]);
+                },
+              ),
+            );
+          case HomeErrorState:
+            return Scaffold(
+              body: Center(
+                child: Text('Error'),
+              ),
+            );
+
+          default:
+            return SizedBox();
+        }
       },
     );
   }
