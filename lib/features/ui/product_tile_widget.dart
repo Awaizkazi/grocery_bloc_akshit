@@ -7,9 +7,11 @@ import '../home/bloc/home_bloc.dart';
 
 class ProductTileWidget extends StatelessWidget {
   final ProductDataModel productDataModel;
+  final HomeBloc homeBloc;
   const ProductTileWidget({
     Key? key,
     required this.productDataModel,
+    required this.homeBloc,
   }) : super(key: key);
 
   @override
@@ -52,12 +54,12 @@ class ProductTileWidget extends StatelessWidget {
                 children: [
                   IconButton(
                       onPressed: () {
-                        // homeBloc.add(HomeWishlistButtonNavigateEvent());
+                        homeBloc.add(HomeProductWishlistButtonClicketEvent());
                       },
                       icon: Icon(Icons.favorite_border)),
                   IconButton(
                       onPressed: () {
-                        // homeBloc.add(HomeCratButtonNavigateEvent());
+                        homeBloc.add(HomeProductCartButtonClicketEvent());
                       },
                       icon: Icon(Icons.shopping_bag_outlined))
                 ],
