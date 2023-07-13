@@ -77,8 +77,9 @@ class _HomeState extends State<Home> {
                 itemCount: successState.products.length,
                 itemBuilder: (context, index) {
                   return ProductTileWidget(
-                      homeBloc: homeBloc,
-                      productDataModel: successState.products[index]);
+                    homeBloc: homeBloc,
+                    productDataModel: successState.products[index],
+                  );
                 },
               ),
             );
