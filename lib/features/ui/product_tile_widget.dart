@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:grocery_bloc_akshit/features/home/bloc/models/home_product_data_model.dart';
 
+import '../home/bloc/home_bloc.dart';
+
 class ProductTileWidget extends StatelessWidget {
   final ProductDataModel productDataModel;
   const ProductTileWidget({
@@ -32,11 +34,36 @@ class ProductTileWidget extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 20),
           Text(
             productDataModel.name,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           Text(productDataModel.description),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "\$ " + productDataModel.price.toString(),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        // homeBloc.add(HomeWishlistButtonNavigateEvent());
+                      },
+                      icon: Icon(Icons.favorite_border)),
+                  IconButton(
+                      onPressed: () {
+                        // homeBloc.add(HomeCratButtonNavigateEvent());
+                      },
+                      icon: Icon(Icons.shopping_bag_outlined))
+                ],
+              )
+            ],
+          ),
         ],
       ),
     );

@@ -14,7 +14,7 @@ class GroceryData {
       'description': 'Organic, locally grown apples',
       'price': 1.99,
       'imageUrl':
-          'https://www.foodrepublic.com/img/gallery/15-types-of-grapes-to-know-eat-and-drink/l-intro-1684769284.jpg',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1F4CMfijuDqw941spkVHzTSLowhcImAn6vg&usqp=CAU',
     },
     {
       'id': '3',
@@ -29,7 +29,7 @@ class GroceryData {
       'description': 'Farm-fresh brown eggs',
       'price': 3.99,
       'imageUrl':
-          'https://cdn.britannica.com/94/151894-050-F72A5317/Brown-eggs.jpg',
+          'https://cf-images.us-east-1.prod.boltdns.net/v1/static/1033249144001/8069fdee-5751-4a87-8515-cc90ddc71bca/683a09b6-dda5-426a-a9dd-2cad85144ed4/1280x720/match/image.jpg',
     },
   ];
 }
